@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty" />
+    <string name="welcome_msg">Добредојдовте во вашиот тракер на цели и навики</string>
+    <string name="login">Логирај се</string>
+    <string name="register">Регистрација</string>
+</resources>

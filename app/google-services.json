@@ -12,7 +12,20 @@
           "package_name": "com.example.goalshabittracker"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "516713855411-r1vl674t49nfe8c0g1uvpobcl33afki1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.goalshabittracker",
+            "certificate_hash": "3a1a487b985c0ba4ec4d46522556b64c02f73ef3"
+          }
+        },
+        {
+          "client_id": "516713855411-89krektn4i8o8qvk1hg4eaji2llngljo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAaraSnmetYfsDA4Hhr2UWCAQEc5EEtzP4"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516713855411-89krektn4i8o8qvk1hg4eaji2llngljo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

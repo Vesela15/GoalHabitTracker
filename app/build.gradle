@@ -30,7 +30,9 @@ android {
 }
 
 dependencies {
-
+    // Android Components
+    implementation libs.constraintlayout
+    implementation libs.activity
     implementation libs.appcompat
     implementation libs.material
     testImplementation libs.junit
@@ -43,4 +45,11 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.messaging)
+
+    // Google Sign-In
+    implementation libs.play.services.auth
+
+    // Facebook Login
+    implementation libs.facebook.login
+    implementation libs.facebook.android.sdk
 }

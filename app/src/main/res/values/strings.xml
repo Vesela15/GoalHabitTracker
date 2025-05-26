@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">GoalsHabitTracker</string>
+    <string name="app_name" translatable="false">GoalsHabitTracker</string>
+
+    <string name="default_web_client_id">516713855411-89krektn4i8o8qvk1hg4eaji2llngljo.apps.googleusercontent.com</string>
+
+    <string name="facebook_app_id" translatable="false">YOUR_FACEBOOK_APP_ID</string>
+    <string name="facebook_client_token" translatable="false">YOUR_FACEBOOK_CLIENT_TOKEN</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fbYOUR_FACEBOOK_APP_ID</string>
+
+    <string name="empty" />
+    <string name="welcome_msg">Welcome to Goals Habit Tracker</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="email_pass_auth_title">Email/Password Authentication</string>
+    <string name="socials_auth_title">Social Authentication</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="continue_as_guest">Continue as Guest</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 </resources>
