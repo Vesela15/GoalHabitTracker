@@ -1,8 +1,10 @@
-package com.example.goalshabittracker;
+package com.example.goalshabittracker.ui.activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.goalshabittracker.R;
 
 public class MainActivity extends AppCompatActivity {
 
