@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "516713855411",
+    "project_id": "goalshabittracker",
+    "storage_bucket": "goalshabittracker.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516713855411:android:265d03415fea04dd57b3c6",
+        "android_client_info": {
+          "package_name": "com.example.goalshabittracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaraSnmetYfsDA4Hhr2UWCAQEc5EEtzP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
