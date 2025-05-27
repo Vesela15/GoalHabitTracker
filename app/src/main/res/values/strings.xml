@@ -2,10 +2,9 @@
     <string name="app_name" translatable="false">GoalsHabitTracker</string>
 
     <string name="default_web_client_id">516713855411-89krektn4i8o8qvk1hg4eaji2llngljo.apps.googleusercontent.com</string>
-
-    <string name="facebook_app_id" translatable="false">YOUR_FACEBOOK_APP_ID</string>
-    <string name="facebook_client_token" translatable="false">YOUR_FACEBOOK_CLIENT_TOKEN</string>
-    <string name="fb_login_protocol_scheme" translatable="false">fbYOUR_FACEBOOK_APP_ID</string>
+    <string name="facebook_app_id" translatable="false">644698875233495</string>
+    <string name="facebook_client_token" translatable="false">80f137c7a35362c580be7e67acd3ad7f</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb644698875233495</string>
 
     <string name="empty" />
     <string name="welcome_msg">Welcome to Goals Habit Tracker</string>
