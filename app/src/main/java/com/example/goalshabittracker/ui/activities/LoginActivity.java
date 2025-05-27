@@ -175,13 +175,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void signOut() {
-        mAuth.signOut();
-        mGoogleSignInClient.signOut();
-        updateUI(null);
-        showToast("Signed out successfully");
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
