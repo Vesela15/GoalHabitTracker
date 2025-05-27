@@ -27,7 +27,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -37,25 +36,20 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "AuthActivity";
+    private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 9001;
 
-    // Firebase Auth
     private FirebaseAuth mAuth;
 
-    // Google Sign In
     private GoogleSignInClient mGoogleSignInClient;
 
-    // Facebook Login
     private CallbackManager mCallbackManager;
 
-    // UI Components
     private TextInputEditText etEmail, etPassword;
-    private MaterialButton btnLogin, btnRegister, btnGoogleLogin, btnAnonymousLogin;
+    private MaterialButton btnLogin, btnGoogleLogin, btnAnonymousLogin;
     private LoginButton btnFacebookLogin;
     private ProgressBar progressBar;
 
@@ -64,22 +58,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        // Initialize UI components
         initializeViews();
-
-        // Configure Google Sign In
         configureGoogleSignIn();
-
-        // Configure Facebook Login
         configureFacebookLogin();
-
-        // Set click listeners
         setClickListeners();
 
-        // Check if user is already signed in
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
@@ -88,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegister);
         btnGoogleLogin = findViewById(R.id.btnGoogleLogin);
         btnFacebookLogin = findViewById(R.id.btnFacebookLogin);
         btnAnonymousLogin = findViewById(R.id.btnAnonymousLogin);
@@ -132,7 +116,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setClickListeners() {
         btnLogin.setOnClickListener(v -> signInWithEmail());
-        btnRegister.setOnClickListener(v -> createAccountWithEmail());
         btnGoogleLogin.setOnClickListener(v -> signInWithGoogle());
         btnAnonymousLogin.setOnClickListener(v -> signInAnonymously());
     }
@@ -159,38 +142,6 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                         showToast("Authentication failed: " + task.getException().getMessage());
-                        updateUI(null);
-                    }
-                });
-    }
-
-    private void createAccountWithEmail() {
-        String email = etEmail.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-
-        if (email.isEmpty() || password.isEmpty()) {
-            showToast("Please enter email and password");
-            return;
-        }
-
-        if (password.length() < 6) {
-            showToast("Password should be at least 6 characters");
-            return;
-        }
-
-        showProgressBar();
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    hideProgressBar();
-                    if (task.isSuccessful()) {
-                        Log.d(TAG, "createUserWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(user);
-                        showToast("Account created successfully");
-                    } else {
-                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                        showToast("Registration failed: " + task.getException().getMessage());
                         updateUI(null);
                     }
                 });
@@ -299,11 +250,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            // User is signed in
-            String userInfo = "Email: " + (user.getEmail() != null ? user.getEmail() : "Not available") + "\n" +
-                    "Display Name: " + (user.getDisplayName() != null ? user.getDisplayName() : "Not available") + "\n" +
-                    "UID: " + user.getUid() + "\n" +
-                    "Anonymous: " + user.isAnonymous();
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         } else {
             // User is signed out
             etEmail.setText("");

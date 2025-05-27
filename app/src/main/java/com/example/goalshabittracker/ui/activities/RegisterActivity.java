@@ -1,13 +1,96 @@
 package com.example.goalshabittracker.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.goalshabittracker.R;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class RegisterActivity extends AppCompatActivity {
+
+    private static final String TAG = "RegisterActivity";
+
+    private FirebaseAuth mAuth;
+
+    private TextInputEditText etEmail, etPassword;
+    private MaterialButton btnRegister;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        initializeViews();
+        setClickListeners();
+    }
+
+    private void initializeViews() {
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        btnRegister = findViewById(R.id.btnRegister);
+        progressBar = findViewById(R.id.progressBar);
+    }
+
+    private void setClickListeners() {
+        btnRegister.setOnClickListener(v -> createAccountWithEmail());
+    }
+
+    private void createAccountWithEmail() {
+        String email = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            showToast("Please enter email and password");
+            return;
+        }
+
+        if (password.length() < 6) {
+            showToast("Password should be at least 6 characters");
+            return;
+        }
+
+        showProgressBar();
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    hideProgressBar();
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "createUserWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        showToast("Account created successfully");
+
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        showToast("Registration failed: " + task.getException().getMessage());
+                    }
+                });
+    }
+
+    private void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

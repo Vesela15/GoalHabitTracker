@@ -4,4 +4,5 @@
     <string name="welcome_msg">Добредојдовте во вашиот тракер на цели и навики</string>
     <string name="login">Логирај се</string>
     <string name="register">Регистрација</string>
+    <string name="create_account">Create account</string>
 </resources>
