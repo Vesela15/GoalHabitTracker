@@ -21,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         setupNotificationPermission();
         logFCMToken();
+        setupAnalytics();
     }
 
     @Override
@@ -102,6 +104,14 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "FCM Token: " + token);
                     }
                 });
+    }
+
+    private void setupAnalytics() {
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        Bundle params = new Bundle();
+        params.putString("screen_name", "main");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, params);
     }
 
     private void logout() {
