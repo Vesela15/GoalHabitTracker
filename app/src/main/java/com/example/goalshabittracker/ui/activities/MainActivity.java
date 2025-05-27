@@ -1,11 +1,19 @@
 package com.example.goalshabittracker.ui.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.goalshabittracker.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -14,10 +22,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private FirebaseAuth mAuth;
+    private ActivityResultLauncher<String> requestPermissionLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bottomNav.setSelectedItemId(R.id.navigation_home);
+
+        setupNotificationPermission();
+        logFCMToken();
     }
 
     @Override
@@ -58,6 +72,36 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setupNotificationPermission() {
+        requestPermissionLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                isGranted -> {
+                    if (isGranted) {
+                        Log.d(TAG, "Notification permission granted");
+                    } else {
+                        Toast.makeText(this, "Notifications disabled", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
+    }
+
+    private void logFCMToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        String token = task.getResult();
+                        Log.d(TAG, "FCM Token: " + token);
+                    }
+                });
     }
 
     private void logout() {
