@@ -1,13 +1,10 @@
 package com.example.goalshabittracker.ui.activities;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -17,27 +14,21 @@ import androidx.core.content.ContextCompat;
 import com.example.goalshabittracker.R;
 import com.example.goalshabittracker.ui.fragments.AchievementsFragment;
 import com.example.goalshabittracker.ui.fragments.HabitsListFragment;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.example.goalshabittracker.ui.fragments.SettingsFragment;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private FirebaseAuth mAuth;
     private ActivityResultLauncher<String> requestPermissionLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mAuth = FirebaseAuth.getInstance();
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.fragment_container, new AchievementsFragment())
                         .commit();
                 return true;
+            } else if (itemId == R.id.navigation_settings) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new SettingsFragment())
+                        .commit();
+                return true;
             }
             return false;
         });
@@ -63,21 +59,6 @@ public class MainActivity extends AppCompatActivity {
         setupNotificationPermission();
         logFCMToken();
         setupAnalytics();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_logout) {
-            logout();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setupNotificationPermission() {
@@ -111,32 +92,5 @@ public class MainActivity extends AppCompatActivity {
         Bundle params = new Bundle();
         params.putString("screen_name", "main");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, params);
-    }
-
-    private void logout() {
-        mAuth.signOut();
-
-        // Check if we have a Google Sign In account
-        if (GoogleSignIn.getLastSignedInAccount(this) != null) {
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(getString(R.string.default_web_client_id))
-                    .requestEmail()
-                    .build();
-            GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this, gso);
-
-            googleSignInClient.signOut().addOnCompleteListener(this, task -> {
-                navigateToWelcome();
-            });
-        } else {
-            // For email/password, Facebook, or anonymous auth
-            navigateToWelcome();
-        }
-    }
-
-    private void navigateToWelcome() {
-        Intent intent = new Intent(this, WelcomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
     }
 }

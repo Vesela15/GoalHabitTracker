@@ -8,4 +8,8 @@
         android:id="@+id/navigation_achievements"
         android:icon="@drawable/ic_achievements"
         android:title="@string/achievements" />
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
 </menu>
