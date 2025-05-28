@@ -139,6 +139,10 @@ public class HabitsListFragment extends Fragment {
                     }
                     adapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error loading habits", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                 });
     }
 
