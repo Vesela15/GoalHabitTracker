@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.goalshabittracker.R;
+import com.example.goalshabittracker.ui.fragments.AchievementsFragment;
 import com.example.goalshabittracker.ui.fragments.HabitsListFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -50,12 +51,13 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
                 return true;
             } else if (itemId == R.id.navigation_achievements) {
-                // Load achievements fragment
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new AchievementsFragment())
+                        .commit();
                 return true;
             }
             return false;
         });
-
         bottomNav.setSelectedItemId(R.id.navigation_home);
 
         setupNotificationPermission();

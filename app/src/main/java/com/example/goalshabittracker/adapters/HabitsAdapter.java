@@ -3,6 +3,7 @@ package com.example.goalshabittracker.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -23,6 +24,8 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
         void onHabitClick(Habit habit);
 
         void onDeleteClick(Habit habit);
+
+        void onHabitCompleted(Habit habit, boolean isCompleted);
     }
 
     public HabitsAdapter(List<Habit> habits, OnHabitListener listener) {
@@ -53,6 +56,7 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
         private TextView tvName, tvDescription, tvCategory, tvFrequency;
         private ImageButton btnDelete;
         private CardView cardView;
+        private CheckBox checkBoxComplete;
 
         public HabitViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,6 +66,7 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
             tvFrequency = itemView.findViewById(R.id.tvHabitFrequency);
             btnDelete = itemView.findViewById(R.id.btnDeleteHabit);
             cardView = itemView.findViewById(R.id.cardViewHabit);
+            checkBoxComplete = itemView.findViewById(R.id.checkBoxComplete);
         }
 
         public void bind(Habit habit) {
@@ -72,6 +77,12 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
 
             cardView.setOnClickListener(v -> listener.onHabitClick(habit));
             btnDelete.setOnClickListener(v -> listener.onDeleteClick(habit));
+
+            checkBoxComplete.setOnCheckedChangeListener(null);
+            checkBoxComplete.setChecked(false); // Default unchecked
+            checkBoxComplete.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                listener.onHabitCompleted(habit, isChecked);
+            });
         }
     }
 }

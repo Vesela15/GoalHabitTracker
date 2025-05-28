@@ -27,7 +27,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_toStartOf="@+id/btnDeleteHabit"
-                android:text="Habit Name"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -39,7 +38,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Delete habit"
+                android:contentDescription="@string/empty"
                 android:src="@drawable/ic_delete"
                 app:tint="@color/error" />
 
@@ -62,10 +61,18 @@
             android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
+            <CheckBox
+                android:id="@+id/checkBoxComplete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/done"
+                android:textColor="@android:color/darker_gray" />
+
             <TextView
                 android:id="@+id/tvHabitCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8"
                 android:layout_weight="1"
                 android:background="@drawable/bg_category_chip"
                 android:gravity="center"

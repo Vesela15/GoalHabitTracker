@@ -9,6 +9,7 @@ public class Habit {
     private long createdAt;
     private boolean isActive;
     private String userId;
+    private boolean isCompleted;
 
     public Habit() {
     }
@@ -85,5 +86,13 @@ public class Habit {
 
     public String getUserId() {
         return userId;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
     }
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,9 @@ import com.example.goalshabittracker.R;
 import com.example.goalshabittracker.adapters.HabitsAdapter;
 import com.example.goalshabittracker.dialogs.AddEditHabitDialogFragment;
 import com.example.goalshabittracker.models.Habit;
+import com.example.goalshabittracker.room.AppDatabase;
+import com.example.goalshabittracker.room.CompletedHabit;
+import com.example.goalshabittracker.room.CompletedHabitDao;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,6 +37,14 @@ public class HabitsListFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private List<Habit> habitsList;
+
+    private CompletedHabitDao completedHabitDao;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        completedHabitDao = AppDatabase.getInstance(requireContext()).completedHabitDao();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,6 +82,34 @@ public class HabitsListFragment extends Fragment {
             public void onDeleteClick(Habit habit) {
                 showDeleteConfirmationDialog(habit);
             }
+
+            @Override
+            public void onHabitCompleted(Habit habit, boolean isCompleted) {
+                if (mAuth.getCurrentUser() == null) return;
+                String userId = mAuth.getCurrentUser().getUid();
+
+                // Update Firestore
+                db.collection("habits")
+                        .document(habit.getId())
+                        .update("completed", isCompleted)
+                        .addOnSuccessListener(aVoid -> {
+                            // Store in Room if completed
+                            if (isCompleted) {
+                                CompletedHabit completedHabit = new CompletedHabit(
+                                        habit.getId(),
+                                        habit.getName(),
+                                        userId
+                                );
+                                new Thread(() -> {
+                                    completedHabitDao.insert(completedHabit);
+                                }).start();
+                            }
+                            loadHabits();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(getContext(), "Error updating habit", Toast.LENGTH_SHORT).show();
+                        });
+            }
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -81,15 +121,14 @@ public class HabitsListFragment extends Fragment {
     }
 
     private void loadHabits() {
-        if (mAuth.getCurrentUser() == null) {
-            return;
-        }
+        if (mAuth.getCurrentUser() == null) return;
 
         progressBar.setVisibility(View.VISIBLE);
         String userId = mAuth.getCurrentUser().getUid();
 
         db.collection("habits")
                 .whereEqualTo("userId", userId)
+                .whereEqualTo("completed", false)  // Only get uncompleted habits
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     habitsList.clear();
@@ -99,10 +138,6 @@ public class HabitsListFragment extends Fragment {
                         habitsList.add(habit);
                     }
                     adapter.notifyDataSetChanged();
-                    progressBar.setVisibility(View.GONE);
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error loading habits: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                 });
     }

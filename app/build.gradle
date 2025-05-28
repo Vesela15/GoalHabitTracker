@@ -52,4 +52,8 @@ dependencies {
     // Facebook Login
     implementation libs.facebook.login
     implementation libs.facebook.android.sdk
+
+    def room_version = "2.7.1"
+    implementation libs.room.runtime
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }
