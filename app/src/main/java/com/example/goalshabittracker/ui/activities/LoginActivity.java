@@ -95,19 +95,16 @@ public class LoginActivity extends AppCompatActivity {
         btnFacebookLogin.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
             @Override
             public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
                 hideProgressBar();
             }
 
             @Override
             public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
                 hideProgressBar();
                 showToast("Facebook authentication failed: " + error.getMessage());
             }
@@ -135,12 +132,9 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     hideProgressBar();
                     if (task.isSuccessful()) {
-                        Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
                         updateUI(user);
-                        showToast("Authentication successful");
                     } else {
-                        Log.w(TAG, "signInWithEmail:failure", task.getException());
                         showToast("Authentication failed: " + task.getException().getMessage());
                         updateUI(null);
                     }
@@ -162,12 +156,9 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         hideProgressBar();
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "signInAnonymously:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            showToast("Signed in as guest");
                         } else {
-                            Log.w(TAG, "signInAnonymously:failure", task.getException());
                             showToast("Anonymous authentication failed");
                             updateUI(null);
                         }
@@ -184,12 +175,9 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
-                Log.w(TAG, "Google sign in failed", e);
                 hideProgressBar();
-                showToast("Google sign in failed");
             }
         }
 
@@ -205,12 +193,9 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         hideProgressBar();
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            showToast("Google authentication successful");
                         } else {
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
                             showToast("Google authentication failed");
                             updateUI(null);
                         }
@@ -219,8 +204,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
-
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -228,12 +211,9 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         hideProgressBar();
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            showToast("Facebook authentication successful");
                         } else {
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
                             showToast("Facebook authentication failed");
                             updateUI(null);
                         }

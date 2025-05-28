@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -16,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.goalshabittracker.R;
+import com.example.goalshabittracker.ui.fragments.HabitsListFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -45,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.navigation_home) {
-                // Load home fragment
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new HabitsListFragment())
+                        .commit();
                 return true;
             } else if (itemId == R.id.navigation_achievements) {
                 // Load achievements fragment
@@ -80,11 +82,6 @@ public class MainActivity extends AppCompatActivity {
         requestPermissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(),
                 isGranted -> {
-                    if (isGranted) {
-                        Log.d(TAG, "Notification permission granted");
-                    } else {
-                        Toast.makeText(this, "Notifications disabled", Toast.LENGTH_SHORT).show();
-                    }
                 }
         );
 

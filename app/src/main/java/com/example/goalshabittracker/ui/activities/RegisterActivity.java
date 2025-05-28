@@ -67,16 +67,13 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     hideProgressBar();
                     if (task.isSuccessful()) {
-                        Log.d(TAG, "createUserWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                        showToast("Account created successfully");
 
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                     } else {
-                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
                         showToast("Registration failed: " + task.getException().getMessage());
                     }
                 });
