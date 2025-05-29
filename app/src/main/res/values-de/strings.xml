@@ -56,4 +56,6 @@
     <string name="are_you_sure_you_want_to_delete">Sind Sie sicher, dass Sie löschen möchten „</string>
     <string name="delete">Löschen</string>
     <string name="guest_user">Anonymer Benutzer</string>
+    <string name="goals_list">Zielliste</string>
+    <string name="completed_goals">Abgeschlossene Ziele</string>
 </resources>

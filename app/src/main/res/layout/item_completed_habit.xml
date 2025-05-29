@@ -3,30 +3,81 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_4dp"
-    app:cardCornerRadius="@dimen/margin_8"
-    app:cardElevation="@dimen/card_elevation">
+    android:layout_marginHorizontal="@dimen/margin_16"
+    android:layout_marginVertical="@dimen/margin_8"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/margin_16"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/light_teal"
+    app:strokeWidth="1dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/margin_16">
+        android:padding="@dimen/padding_24">
+
+        <View
+            android:id="@+id/accentLine"
+            android:layout_width="@dimen/margin_4dp"
+            android:layout_height="0dp"
+            android:background="@color/teal_700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textViewHabitName"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/subtitle_text_size"
-            android:textStyle="bold" />
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:letterSpacing="0.01"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_text_size_medium"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/statusIndicator"
+            app:layout_constraintStart_toEndOf="@+id/accentLine"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/statusIndicator"
+            android:layout_width="@dimen/padding_12"
+            android:layout_height="@dimen/padding_12"
+            android:background="@drawable/circle_indicator"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewHabitName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textViewHabitName" />
 
         <TextView
             android:id="@+id/textViewCompletedDate"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8"
-            android:textColor="@android:color/darker_gray" />
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_16"
+            android:background="@drawable/bg_date_badge"
+            android:letterSpacing="0.02"
+            android:paddingHorizontal="@dimen/margin_16"
+            android:paddingVertical="@dimen/margin_8"
+            android:textColor="@color/teal_700"
+            android:textSize="@dimen/small_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/accentLine"
+            app:layout_constraintTop_toBottomOf="@+id/textViewHabitName" />
 
-    </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_20"
+            android:alpha="0.5"
+            android:background="@color/light_teal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/accentLine"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCompletedDate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

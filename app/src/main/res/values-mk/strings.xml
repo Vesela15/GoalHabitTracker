@@ -56,4 +56,6 @@
     <string name="are_you_sure_you_want_to_delete">Дали сте сигурни дека сакате да ја избришете „</string>
     <string name="delete">Избриши</string>
     <string name="guest_user">Анонимен корисник</string>
+    <string name="goals_list">Список на цели</string>
+    <string name="completed_goals">Остварени цели</string>
 </resources>

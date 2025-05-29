@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,10 +12,14 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_16"
-            android:hint="@string/habit_name">
+            android:layout_marginBottom="20dp"
+            android:hint="@string/habit_name"
+            app:boxStrokeColor="@color/teal_700"
+            app:cursorColor="@color/teal_700"
+            app:hintTextColor="@color/teal_700">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etHabitName"
@@ -25,10 +31,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_16"
-            android:hint="@string/description_optional">
+            android:layout_marginBottom="20dp"
+            android:hint="@string/description_optional"
+            app:boxStrokeColor="@color/teal_700"
+            app:cursorColor="@color/teal_700"
+            app:hintTextColor="@color/teal_700">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etHabitDescription"
@@ -40,10 +50,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_16"
-            android:hint="@string/category">
+            android:layout_marginBottom="20dp"
+            android:hint="@string/category"
+            app:boxStrokeColor="@color/teal_700"
+            app:cursorColor="@color/teal_700"
+            app:hintTextColor="@color/teal_700">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etHabitCategory"
@@ -57,17 +71,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/padding_12"
             android:text="@string/target_frequency_times_per_week"
-            android:textSize="@dimen/subtitle_text_size"
-            android:textStyle="bold" />
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/subtitle_text_size" />
 
         <NumberPicker
             android:id="@+id/npFrequency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="32dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,20 +89,26 @@
             android:gravity="end"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCancel"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@string/cancel" />
+                android:layout_marginEnd="12dp"
+                android:backgroundTint="@color/teal_200"
+                android:text="@string/cancel"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_text_size" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
-                style="@style/Widget.MaterialComponents.Button"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save" />
+                android:backgroundTint="@color/teal_700"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_text_size" />
 
         </LinearLayout>
 

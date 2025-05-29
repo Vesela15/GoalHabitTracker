@@ -42,16 +42,19 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.navigation_home) {
+                setSupportActionBarTitle(R.string.goals_list);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new HabitsListFragment())
                         .commit();
                 return true;
             } else if (itemId == R.id.navigation_achievements) {
+                setSupportActionBarTitle(R.string.completed_goals);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new AchievementsFragment())
                         .commit();
                 return true;
             } else if (itemId == R.id.navigation_settings) {
+                setSupportActionBarTitle(R.string.settings);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new SettingsFragment())
                         .commit();
@@ -88,5 +91,11 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "FCM Token: " + token);
                     }
                 });
+    }
+
+    private void setSupportActionBarTitle(int title) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(title);
+        }
     }
 }

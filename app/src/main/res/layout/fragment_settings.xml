@@ -10,41 +10,70 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_16"
-        app:cardCornerRadius="@dimen/margin_8"
-        app:cardElevation="@dimen/margin_4dp">
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/margin_16"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/light_teal"
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/margin_16">
+            android:padding="@dimen/margin_20">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Profile Header with Accent -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/profile"
-                android:textSize="@dimen/title_text_size_small"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/margin_4dp"
+                    android:layout_height="@dimen/margin_40"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:background="@color/teal_700" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_text_size_small"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvUserEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8" />
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_16"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/subtitle_text_size" />
 
             <TextView
                 android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_4dp" />
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_4dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/desc_text_size"
+                android:textStyle="bold" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/margin_8"
-        app:cardElevation="@dimen/card_elevation">
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/margin_16"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/light_teal"
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,16 +86,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
-                android:padding="@dimen/margin_16"
+                android:padding="@dimen/margin_20"
                 android:text="@string/change_language"
                 android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="@dimen/subtitle_text_size"
+                android:textStyle="normal"
                 app:icon="@drawable/ic_language"
-                app:iconGravity="start" />
+                app:iconGravity="start"
+                app:iconSize="@dimen/padding_24"
+                app:iconTint="@color/teal_700"
+                app:rippleColor="@color/light_teal" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
+                android:layout_marginHorizontal="20dp"
+                android:background="@color/light_teal" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogout"
@@ -74,13 +110,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
-                android:padding="@dimen/margin_16"
+                android:padding="@dimen/margin_20"
                 android:text="@string/logout"
                 android:textAlignment="viewStart"
-                android:textColor="@color/design_default_color_error"
+                android:textColor="@color/black"
+                android:textSize="@dimen/subtitle_text_size"
+                android:textStyle="normal"
                 app:icon="@drawable/ic_logout"
                 app:iconGravity="start"
-                app:iconTint="@color/design_default_color_error" />
+                app:iconSize="@dimen/padding_24"
+                app:iconTint="@color/teal_700"
+                app:rippleColor="@color/light_teal" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

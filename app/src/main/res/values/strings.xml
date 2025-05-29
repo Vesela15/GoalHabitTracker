@@ -55,4 +55,6 @@
     <string name="are_you_sure_you_want_to_delete">Are you sure you want to delete \"</string>
     <string name="delete">Delete</string>
     <string name="guest_user">Anonymous User</string>
+    <string name="goals_list">Goals List</string>
+    <string name="completed_goals">Completed Goals</string>
 </resources>
