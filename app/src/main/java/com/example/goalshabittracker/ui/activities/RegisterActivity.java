@@ -2,7 +2,6 @@ package com.example.goalshabittracker.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -13,11 +12,8 @@ import com.example.goalshabittracker.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    private static final String TAG = "RegisterActivity";
 
     private FirebaseAuth mAuth;
 
@@ -52,12 +48,12 @@ public class RegisterActivity extends AppCompatActivity {
         String password = etPassword.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
-            showToast("Please enter email and password");
+            showToast(getString(R.string.please_enter_email_and_password));
             return;
         }
 
         if (password.length() < 6) {
-            showToast("Password should be at least 6 characters");
+            showToast(getString(R.string.password_should_be_at_least_6_characters));
             return;
         }
 
@@ -67,14 +63,16 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     hideProgressBar();
                     if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                     } else {
-                        showToast("Registration failed: " + task.getException().getMessage());
+                        if (task.getException() != null) {
+                            showToast("Registration failed: " + task.getException().getMessage());
+                        } else {
+                            showToast("Registration failed");
+                        }
                     }
                 });
     }

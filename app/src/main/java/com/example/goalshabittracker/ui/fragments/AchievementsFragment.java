@@ -23,7 +23,7 @@ public class AchievementsFragment extends Fragment {
     private RecyclerView recyclerView;
     private CompletedHabitsAdapter adapter;
     private CompletedHabitDao completedHabitDao;
-    private List<CompletedHabit> completedHabits = new ArrayList<>();
+    private final List<CompletedHabit> completedHabits = new ArrayList<>();
     private FirebaseAuth mAuth;
 
     @Override

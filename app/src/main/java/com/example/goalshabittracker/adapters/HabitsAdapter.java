@@ -73,7 +73,7 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
             tvName.setText(habit.getName());
             tvDescription.setText(habit.getDescription());
             tvCategory.setText(habit.getCategory());
-            tvFrequency.setText(habit.getTargetFrequency() + " times/week");
+            tvFrequency.setText(habit.getTargetFrequency() + itemView.getContext().getString(R.string.times_week));
 
             cardView.setOnClickListener(v -> listener.onHabitClick(habit));
             btnDelete.setOnClickListener(v -> listener.onDeleteClick(habit));

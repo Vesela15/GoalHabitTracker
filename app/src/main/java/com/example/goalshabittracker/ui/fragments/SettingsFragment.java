@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.goalshabittracker.R;
 import com.example.goalshabittracker.ui.activities.WelcomeActivity;
+import com.example.goalshabittracker.utils.LanguageUtils;
+import com.example.goalshabittracker.utils.PreferencesManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -66,8 +68,13 @@ public class SettingsFragment extends Fragment {
     private void displayUserInfo() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            tvUserEmail.setText(user.getEmail());
-            tvUserName.setText(user.getDisplayName());
+            if (user.isAnonymous()) {
+                tvUserEmail.setText(R.string.empty);
+                tvUserName.setText(R.string.guest_user);
+            } else {
+                tvUserEmail.setText(user.getEmail());
+                tvUserName.setText(user.getDisplayName());
+            }
         }
     }
 
@@ -77,12 +84,23 @@ public class SettingsFragment extends Fragment {
     }
 
     private void showLanguageDialog() {
-        String[] languages = {"English", "Macedonian"};
+        String[] languages = {getString(R.string.english), getString(R.string.macedonian), getString(R.string.german)};
+        String[] languageCodes = {"en", "mk", "de"};
+
         new AlertDialog.Builder(requireContext())
                 .setTitle(R.string.select_language)
                 .setItems(languages, (dialog, which) -> {
-                    // Handle language change
-                    // You'll need to implement the actual language change logic
+                    // Save language preference
+                    PreferencesManager preferencesManager = new PreferencesManager(requireContext());
+                    preferencesManager.setLanguage(languageCodes[which]);
+
+                    // Change language
+                    LanguageUtils.setLocale(requireContext(), languageCodes[which]);
+
+                    // Restart the app to apply changes
+                    Intent intent = requireActivity().getIntent();
+                    requireActivity().finish();
+                    startActivity(intent);
                 })
                 .show();
     }

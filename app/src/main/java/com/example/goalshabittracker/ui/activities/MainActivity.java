@@ -15,6 +15,8 @@ import com.example.goalshabittracker.R;
 import com.example.goalshabittracker.ui.fragments.AchievementsFragment;
 import com.example.goalshabittracker.ui.fragments.HabitsListFragment;
 import com.example.goalshabittracker.ui.fragments.SettingsFragment;
+import com.example.goalshabittracker.utils.LanguageUtils;
+import com.example.goalshabittracker.utils.PreferencesManager;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -28,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        PreferencesManager preferenceManager = new PreferencesManager(this);
+        LanguageUtils.setLocale(this, preferenceManager.getLanguage());
+
         setContentView(R.layout.activity_main);
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);

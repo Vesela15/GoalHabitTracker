@@ -57,7 +57,7 @@ public class CompletedHabitsAdapter extends RecyclerView.Adapter<CompletedHabits
         public void bind(CompletedHabit habit) {
             textViewHabitName.setText(habit.getHabitName());
             String completedDate = dateFormat.format(new Date(habit.getCompletedAt()));
-            textViewCompletedDate.setText("Completed: " + completedDate);
+            textViewCompletedDate.setText(itemView.getContext().getString(R.string.completed) + completedDate);
         }
     }
 }

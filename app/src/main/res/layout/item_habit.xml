@@ -4,18 +4,18 @@
     android:id="@+id/cardViewHabit"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="@dimen/margin_8"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="@dimen/margin_8"
+    app:cardElevation="@dimen/card_elevation">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/margin_16">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -27,14 +27,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_toStartOf="@+id/btnDeleteHabit"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/title_text_size_small"
                 android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/btnDeleteHabit"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="@dimen/margin_32"
+                android:layout_height="@dimen/margin_32"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -48,17 +48,16 @@
             android:id="@+id/tvHabitDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/margin_4dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Habit description"
             android:textColor="@android:color/darker_gray"
-            android:textSize="14sp" />
+            android:textSize="@dimen/desc_text_size" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_8"
             android:orientation="horizontal">
 
             <CheckBox
@@ -76,19 +75,18 @@
                 android:layout_weight="1"
                 android:background="@drawable/bg_category_chip"
                 android:gravity="center"
-                android:padding="4dp"
-                android:text="Category"
+                android:padding="@dimen/margin_4dp"
                 android:textColor="@color/teal_700"
-                android:textSize="12sp" />
+                android:textSize="@dimen/small_text_size" />
 
             <TextView
                 android:id="@+id/tvHabitFrequency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="3 times/week"
+                android:layout_marginStart="@dimen/margin_8"
+                android:text="@string/times_week"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="12sp" />
+                android:textSize="@dimen/small_text_size" />
 
         </LinearLayout>
 

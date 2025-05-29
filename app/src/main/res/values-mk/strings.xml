@@ -1,8 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">GoalsHabitTracker</string>
+
+    <string name="default_web_client_id">516713855411-89krektn4i8o8qvk1hg4eaji2llngljo.apps.googleusercontent.com</string>
+    <string name="facebook_app_id" translatable="false">644698875233495</string>
+    <string name="facebook_client_token" translatable="false">80f137c7a35362c580be7e67acd3ad7f</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb644698875233495</string>
+
     <string name="empty" />
-    <string name="welcome_msg">Добредојдовте во вашиот тракер на цели и навики</string>
-    <string name="login">Логирај се</string>
+    <string name="welcome_msg">Добредојдовте во Goals Habit Tracker</string>
+    <string name="login">Најава</string>
     <string name="register">Регистрација</string>
-    <string name="create_account">Create account</string>
+    <string name="email_pass_auth_title">Најава со Е-пошта и Лозинка</string>
+    <string name="socials_auth_title">Најава преку Социјални Мрежи</string>
+    <string name="sign_in_with_google">Најави се со Google</string>
+    <string name="continue_as_guest">Продолжи како Гостин</string>
+    <string name="password">Лозинка</string>
+    <string name="email">Е-пошта</string>
+    <string name="create_account">Креирај сметка</string>
+    <string name="home">Дома</string>
+    <string name="achievements">Достигнувања</string>
+    <string name="logout">Одјава</string>
+    <string name="add_habit">Додади Навика</string>
+    <string name="edit_habit">Уреди Навика</string>
+    <string name="name_is_required">Името е задолжително</string>
+    <string name="category_is_required">Категоријата е задолжителна</string>
+    <string name="done">Готово</string>
+    <string name="profile">Профил</string>
+    <string name="select_language">Избери Јазик</string>
+    <string name="settings">Поставки</string>
+    <string name="change_language">Промени Јазик</string>
+    <string name="english">Англиски</string>
+    <string name="macedonian">Македонски</string>
+    <string name="german">Германски</string>
+    <string name="completed">"Завршено: "</string>
+    <string name="times_week">" пати/неделно"</string>
+    <string name="habit_name">Име на Цел</string>
+    <string name="description_optional">Опис (Опционално)</string>
+    <string name="category">Категорија</string>
+    <string name="target_frequency_times_per_week">Целна Фреквенција (пати неделно)</string>
+    <string name="cancel">Откажи</string>
+    <string name="save">Зачувај</string>
+    <string name="no_habits_yet">Сè уште немате цели.\nДопрете + за да ја додадете вашата прва цел!</string>
+    <string name="facebook_authentication_failed">Неуспешна најава преку Facebook:</string>
+    <string name="please_enter_email_and_password">Внесете е-пошта и лозинка</string>
+    <string name="authentication_failed">Најавата не беше успешна:</string>
+    <string name="anonymous_authentication_failed">Неуспешна анонимна најава</string>
+    <string name="google_authentication_failed">Неуспешна најава преку Google</string>
+    <string name="password_should_be_at_least_6_characters">Лозинката треба да има најмалку 6 знаци</string>
+    <string name="error_updating_habit">Грешка при ажурирање на навика</string>
+    <string name="error_loading_habits">Грешка при вчитување на навики</string>
+    <string name="error_adding_habit">Грешка при додавање на навика</string>
+    <string name="error_deleting_habit">Грешка при бришење на навика</string>
+    <string name="delete_habit">Избриши Навика</string>
+    <string name="are_you_sure_you_want_to_delete">Дали сте сигурни дека сакате да ја избришете „</string>
+    <string name="delete">Избриши</string>
+    <string name="guest_user">Анонимен корисник</string>
 </resources>

@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HabitsListFragment extends Fragment {
+
     private RecyclerView recyclerView;
     private HabitsAdapter adapter;
     private FloatingActionButton fabAdd;
@@ -107,7 +108,7 @@ public class HabitsListFragment extends Fragment {
                             loadHabits();
                         })
                         .addOnFailureListener(e -> {
-                            Toast.makeText(getContext(), "Error updating habit", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getString(R.string.error_updating_habit), Toast.LENGTH_SHORT).show();
                         });
             }
         });
@@ -141,7 +142,7 @@ public class HabitsListFragment extends Fragment {
                     progressBar.setVisibility(View.GONE);
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error loading habits", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.error_loading_habits), Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                 });
     }
@@ -169,7 +170,7 @@ public class HabitsListFragment extends Fragment {
                     loadHabits();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error adding habit", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.error_adding_habit), Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -193,18 +194,18 @@ public class HabitsListFragment extends Fragment {
                                     loadHabits();
                                 })
                                 .addOnFailureListener(e -> {
-                                    Toast.makeText(getContext(), "Error updating habit", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), getString(R.string.error_updating_habit), Toast.LENGTH_SHORT).show();
                                 });
                     }
                 });
     }
 
     private void showDeleteConfirmationDialog(Habit habit) {
-        new AlertDialog.Builder(getContext())
-                .setTitle("Delete Habit")
-                .setMessage("Are you sure you want to delete \"" + habit.getName() + "\"?")
-                .setPositiveButton("Delete", (dialog, which) -> deleteHabit(habit))
-                .setNegativeButton("Cancel", null)
+        new AlertDialog.Builder(requireContext())
+                .setTitle(R.string.delete_habit)
+                .setMessage(getString(R.string.are_you_sure_you_want_to_delete) + habit.getName() + "\"?")
+                .setPositiveButton(R.string.delete, (dialog, which) -> deleteHabit(habit))
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
@@ -225,7 +226,7 @@ public class HabitsListFragment extends Fragment {
                                     loadHabits();
                                 })
                                 .addOnFailureListener(e -> {
-                                    Toast.makeText(getContext(), "Error deleting habit", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), getString(R.string.error_deleting_habit), Toast.LENGTH_SHORT).show();
                                 });
                     }
                 });
