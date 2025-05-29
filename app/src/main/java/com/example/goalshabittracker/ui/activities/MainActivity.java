@@ -19,7 +19,6 @@ import com.example.goalshabittracker.utils.LanguageUtils;
 import com.example.goalshabittracker.utils.PreferencesManager;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
         setupNotificationPermission();
         logFCMToken();
-        setupAnalytics();
     }
 
     private void setupNotificationPermission() {
@@ -90,13 +88,5 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "FCM Token: " + token);
                     }
                 });
-    }
-
-    private void setupAnalytics() {
-        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
-        Bundle params = new Bundle();
-        params.putString("screen_name", "main");
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, params);
     }
 }

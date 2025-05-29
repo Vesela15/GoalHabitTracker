@@ -20,6 +20,7 @@ import com.example.goalshabittracker.models.Habit;
 import com.example.goalshabittracker.room.AppDatabase;
 import com.example.goalshabittracker.room.CompletedHabit;
 import com.example.goalshabittracker.room.CompletedHabitDao;
+import com.example.goalshabittracker.utils.AnalyticsUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,20 +31,23 @@ import java.util.List;
 
 public class HabitsListFragment extends Fragment {
 
-    private RecyclerView recyclerView;
-    private HabitsAdapter adapter;
     private FloatingActionButton fabAdd;
     private ProgressBar progressBar;
 
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
-    private List<Habit> habitsList;
+    private AnalyticsUtils analyticsUtils;
 
+    private RecyclerView recyclerView;
+    private HabitsAdapter adapter;
+    private List<Habit> habitsList;
     private CompletedHabitDao completedHabitDao;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        analyticsUtils = new AnalyticsUtils(requireContext());
         completedHabitDao = AppDatabase.getInstance(requireContext()).completedHabitDao();
     }
 
@@ -140,6 +144,7 @@ public class HabitsListFragment extends Fragment {
                     }
                     adapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
+                    analyticsUtils.logHabitsLoaded(habitsList.size());
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), getString(R.string.error_loading_habits), Toast.LENGTH_SHORT).show();
@@ -167,6 +172,7 @@ public class HabitsListFragment extends Fragment {
         db.collection("habits")
                 .add(habit)
                 .addOnSuccessListener(documentReference -> {
+                    analyticsUtils.logHabitAdded(habit.getName());
                     loadHabits();
                 })
                 .addOnFailureListener(e -> {
@@ -191,6 +197,7 @@ public class HabitsListFragment extends Fragment {
                                         "category", habit.getCategory(),
                                         "targetFrequency", habit.getTargetFrequency())
                                 .addOnSuccessListener(aVoid -> {
+                                    analyticsUtils.logHabitEdited(habit.getName());
                                     loadHabits();
                                 })
                                 .addOnFailureListener(e -> {
@@ -223,6 +230,7 @@ public class HabitsListFragment extends Fragment {
                         db.collection("habits").document(habit.getId())
                                 .delete()  // This deletes the document completely
                                 .addOnSuccessListener(aVoid -> {
+                                    analyticsUtils.logHabitDeleted(habit.getName());
                                     loadHabits();
                                 })
                                 .addOnFailureListener(e -> {

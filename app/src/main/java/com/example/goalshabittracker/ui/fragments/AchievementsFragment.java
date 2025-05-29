@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import com.example.goalshabittracker.adapters.CompletedHabitsAdapter;
 import com.example.goalshabittracker.room.AppDatabase;
 import com.example.goalshabittracker.room.CompletedHabit;
 import com.example.goalshabittracker.room.CompletedHabitDao;
+import com.example.goalshabittracker.utils.AnalyticsUtils;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -22,9 +24,18 @@ import java.util.List;
 public class AchievementsFragment extends Fragment {
     private RecyclerView recyclerView;
     private CompletedHabitsAdapter adapter;
+
     private CompletedHabitDao completedHabitDao;
     private final List<CompletedHabit> completedHabits = new ArrayList<>();
+
     private FirebaseAuth mAuth;
+    private AnalyticsUtils analyticsUtils;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        analyticsUtils = new AnalyticsUtils(requireContext());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +65,7 @@ public class AchievementsFragment extends Fragment {
             completedHabits.clear();
             completedHabits.addAll(habits);
             adapter.notifyDataSetChanged();
+            analyticsUtils.logAchievementsViewed(habits.size());
         });
     }
 }
