@@ -13,11 +13,10 @@
 
         <ImageButton
             android:id="@+id/languageButton"
-            android:layout_width="@dimen/margin_32"
-            android:layout_height="@dimen/margin_32"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/change_language"
-            android:padding="@dimen/padding_12"
             android:src="@drawable/ic_language"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

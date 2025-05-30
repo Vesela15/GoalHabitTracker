@@ -94,7 +94,7 @@
                 android:textStyle="normal"
                 app:icon="@drawable/ic_language"
                 app:iconGravity="start"
-                app:iconSize="@dimen/padding_24"
+                app:iconSize="@dimen/settings_icon_size"
                 app:iconTint="@color/teal_700"
                 app:rippleColor="@color/light_teal" />
 

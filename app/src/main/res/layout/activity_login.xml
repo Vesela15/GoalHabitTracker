@@ -120,26 +120,39 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAnonymousLogin"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:text="@string/continue_as_guest"
+                    android:textColor="@color/teal_700"
+                    android:textSize="@dimen/button_text_size"
+                    app:rippleColor="@color/light_teal" />
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnGoogleLogin"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_8"
                     android:drawableEnd="@drawable/common_google_signin_btn_icon_dark"
-                    android:text="@string/sign_in_with_google" />
+                    android:text="@string/sign_in_with_google"
+                    android:textColor="@color/teal_700"
+                    android:textSize="@dimen/button_text_size"
+                    app:rippleColor="@color/light_teal" />
+
 
                 <com.facebook.login.widget.LoginButton
                     android:id="@+id/btnFacebookLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_8" />
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:backgroundTint="@color/teal_700"
+                    android:paddingTop="@dimen/margin_8"
+                    android:paddingBottom="@dimen/margin_8"
+                    android:textSize="@dimen/button_text_size" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnAnonymousLogin"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/continue_as_guest" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
