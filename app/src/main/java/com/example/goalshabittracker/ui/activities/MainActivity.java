@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.goalshabittracker.R;
 import com.example.goalshabittracker.ui.fragments.AchievementsFragment;
@@ -41,31 +42,32 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
             if (itemId == R.id.navigation_home) {
                 setSupportActionBarTitle(R.string.goals_list);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new HabitsListFragment())
-                        .commit();
-                return true;
+                transaction.replace(R.id.fragment_container, new HabitsListFragment());
             } else if (itemId == R.id.navigation_achievements) {
                 setSupportActionBarTitle(R.string.completed_goals);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new AchievementsFragment())
-                        .commit();
-                return true;
+                transaction.replace(R.id.fragment_container, new AchievementsFragment());
             } else if (itemId == R.id.navigation_settings) {
                 setSupportActionBarTitle(R.string.settings);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new SettingsFragment())
-                        .commit();
-                return true;
+                transaction.replace(R.id.fragment_container, new SettingsFragment());
+            } else {
+                return false;
             }
-            return false;
+
+            transaction.commitAllowingStateLoss();
+            return true;
         });
-        bottomNav.setSelectedItemId(R.id.navigation_home);
+
+        if (savedInstanceState == null) {
+            bottomNav.setSelectedItemId(R.id.navigation_home);
+        }
 
         setupNotificationPermission();
-        logFCMToken();
+
+        new Thread(this::logFCMToken).start();
     }
 
     private void setupNotificationPermission() {
